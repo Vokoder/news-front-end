@@ -1,0 +1,14 @@
+.authorisationMethodText {
+  margin: 0;
+  margin-top: 1vh;
+  padding: 0;
+  color: rgba(153, 153, 153, 1) !important;
+}
+
+.authorisationMethodButton {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: rgba(153, 153, 153, 1);
+}
