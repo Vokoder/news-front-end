@@ -15,6 +15,6 @@ export const AuthProtected = () => {
       dispatch(setPath(path));
     }
   }, [dispatch, path, pathData]);
-  
-  return <Outlet />
+
+  return <Outlet />;
 };

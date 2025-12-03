@@ -9,7 +9,7 @@ type UserState = {
 
 const jwt = getCookie('token');
 const user = getCookie('User');
-const initialState: UserState = { user: jwt ? { jwt, user } as unknown as UserJWT : null };
+const initialState: UserState = { user: jwt ? ({ jwt, user } as unknown as UserJWT) : null };
 
 const userSlice = createSlice({
   name: 'user',

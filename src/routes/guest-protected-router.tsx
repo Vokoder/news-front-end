@@ -21,5 +21,5 @@ export const GuestProtected = () => {
     }
   }, [user, navigate, location, path]);
 
-  return <Outlet />
+  return <Outlet />;
 };

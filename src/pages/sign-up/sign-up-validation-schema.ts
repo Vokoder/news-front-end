@@ -6,7 +6,7 @@ export const signUpSchema = yup
     email: yup
       .string()
       .transform((originalValue) => (originalValue ? originalValue.trim() : originalValue))
-      .email(                                                                                                                                                                                                                                                                                                                                                                                                                                                             )
+      .email()
       .required(REQUIRED),
 
     password: yup
