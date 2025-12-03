@@ -28,7 +28,7 @@ export const News: React.FC = () => {
   const [total, setTotal] = useState<number>(0);
   const [loading, setLoading] = useState<boolean>(false);
   const userCookie = getCookie('User');
-  const [user, setUser] = useState<User | null>(userCookie ? JSON.parse(userCookie) as User : null);
+  const [user, setUser] = useState<User | null>(userCookie ? (JSON.parse(userCookie) as User) : null);
 
   const navigate = useNavigate();
 
@@ -44,12 +44,12 @@ export const News: React.FC = () => {
       const data: ArticlesArray = await getArticles({
         pagination: {
           page,
-          pageSize
+          pageSize,
         },
         filters: { category: selectedCategory },
         sort,
       });
-      setArticles(data.data as Article[] ?? []);
+      setArticles((data.data as Article[]) ?? []);
       setTotal(data.meta?.pagination?.total ?? 0);
     } catch (err) {
       console.error('Failed to load articles', err);
@@ -70,22 +70,22 @@ export const News: React.FC = () => {
 
   const handleCreate = () => {
     setCreateOpen(true);
-  }
+  };
 
   const handleClose = () => {
     setCreateOpen(false);
-  }
+  };
 
   const onCreated = (article: Article) => {
     setCreateOpen(false);
     setSelectedCategory(null);
-    dispatch(showAlert({ type: 'success', message: `Новость с id ${article.id} создана` }))
-  }
+    dispatch(showAlert({ type: 'success', message: `Новость с id ${article.id} создана` }));
+  };
 
   const onOk = () => {
-    dispatch(showAlert({ type: 'error', message: 'Изменения не сохранены' }))
+    dispatch(showAlert({ type: 'error', message: 'Изменения не сохранены' }));
     setCreateOpen(false);
-  }
+  };
 
   const handleLogout = async () => {
     if (user) {
@@ -163,8 +163,8 @@ export const News: React.FC = () => {
 
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: 16 }}>
                   <div>
-                    Страница <strong>{page}</strong> из <strong>{Math.ceil(total / pageSize) || 1}</strong>
-                    , всего <strong>{total}</strong>
+                    Страница <strong>{page}</strong> из <strong>{Math.ceil(total / pageSize) || 1}</strong>, всего{' '}
+                    <strong>{total}</strong>
                   </div>
 
                   <Pagination
@@ -190,7 +190,11 @@ export const News: React.FC = () => {
         <CreateArticleForm onClose={handleClose} onCreated={onCreated} categories={categories} />
       </Modal>
 
-      {alert && <div style={{ position: 'fixed', bottom: 20, right: 20 }}><AlertMessage /></div>}
+      {alert && (
+        <div style={{ position: 'fixed', bottom: 20, right: 20 }}>
+          <AlertMessage />
+        </div>
+      )}
     </div>
   );
 };

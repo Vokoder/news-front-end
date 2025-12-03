@@ -35,7 +35,10 @@ export const EditArticleForm: React.FC<Props> = ({ article, onClose, onUpdated, 
     e?.preventDefault();
     setError(null);
     const v = validate();
-    if (v) { setError(v); return; }
+    if (v) {
+      setError(v);
+      return;
+    }
 
     const payload: CreateArticleDto = {
       title: title.trim(),
@@ -66,7 +69,7 @@ export const EditArticleForm: React.FC<Props> = ({ article, onClose, onUpdated, 
         <input
           autoFocus
           value={title}
-          onChange={e => setTitle(e.target.value)}
+          onChange={(e) => setTitle(e.target.value)}
           placeholder="Title"
           required
           style={{ width: '100%', padding: 8, marginTop: 6, marginBottom: 12 }}
@@ -77,11 +80,15 @@ export const EditArticleForm: React.FC<Props> = ({ article, onClose, onUpdated, 
         Category (optional)
         <select
           value={categoryId}
-          onChange={e => setCategoryId(e.target.value === '' ? '' : Number(e.target.value))}
+          onChange={(e) => setCategoryId(e.target.value === '' ? '' : Number(e.target.value))}
           style={{ width: '100%', padding: 8, marginTop: 6, marginBottom: 12 }}
         >
           <option value="">— none —</option>
-          {categories?.map(c => <option key={c.id} value={c.id}>{c.name}</option>)}
+          {categories?.map((c) => (
+            <option key={c.id} value={c.id}>
+              {c.name}
+            </option>
+          ))}
         </select>
       </label>
 
@@ -89,7 +96,7 @@ export const EditArticleForm: React.FC<Props> = ({ article, onClose, onUpdated, 
         Excerpt
         <textarea
           value={excerpt}
-          onChange={e => setExcerpt(e.target.value)}
+          onChange={(e) => setExcerpt(e.target.value)}
           placeholder="Short excerpt"
           rows={3}
           style={{ width: '100%', padding: 8, marginTop: 6, marginBottom: 12 }}
@@ -100,7 +107,7 @@ export const EditArticleForm: React.FC<Props> = ({ article, onClose, onUpdated, 
         Content
         <textarea
           value={content}
-          onChange={e => setContent(e.target.value)}
+          onChange={(e) => setContent(e.target.value)}
           placeholder="Full content"
           rows={8}
           style={{ width: '100%', padding: 8, marginTop: 6, marginBottom: 12 }}
@@ -109,7 +116,9 @@ export const EditArticleForm: React.FC<Props> = ({ article, onClose, onUpdated, 
 
       <div style={{ display: 'flex', gap: 8, justifyContent: 'space-between', alignItems: 'center' }}>
         <div>
-          <button type="button" onClick={onClose} disabled={loading}>Cancel</button>
+          <button type="button" onClick={onClose} disabled={loading}>
+            Cancel
+          </button>
         </div>
 
         <div style={{ display: 'flex', gap: 8 }}>

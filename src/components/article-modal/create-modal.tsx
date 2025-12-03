@@ -11,7 +11,9 @@ interface ModalProps {
 export const Modal: React.FC<ModalProps> = ({ isOpen, onClose, title, children }) => {
   useEffect(() => {
     if (!isOpen) return;
-    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') onClose(); };
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose();
+    };
     document.addEventListener('keydown', onKey);
     document.body.style.overflow = 'hidden';
     return () => {
@@ -24,9 +26,11 @@ export const Modal: React.FC<ModalProps> = ({ isOpen, onClose, title, children }
 
   return (
     <div className="modal-backdrop" onMouseDown={onClose} role="dialog" aria-modal="true">
-      <div className="modal-content" onMouseDown={e => e.stopPropagation()}>
+      <div className="modal-content" onMouseDown={(e) => e.stopPropagation()}>
         {title && <h2 className="modal-title">{title}</h2>}
-        <button className="modal-close" onClick={onClose} aria-label="Close">×</button>
+        <button className="modal-close" onClick={onClose} aria-label="Close">
+          ×
+        </button>
         <div className="modal-body">{children}</div>
       </div>
     </div>
