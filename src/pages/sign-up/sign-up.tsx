@@ -13,7 +13,6 @@ import { FooterText } from '../../components/footer-text';
 import { InputField, InputPasswordField } from '../../components/form';
 import { showAlert, hideAlert } from '../../store';
 import { sendRequest } from '../../modules/auth-axios';
-import { SERVER_REGISTER_ADRESS } from '../../constants/env';
 import { HttpError } from '../../modules/http-error';
 import { useAppDispatch } from '../../store/hooks';
 import { logIn } from '../../store/user-slice';
@@ -28,7 +27,7 @@ export const SignUpForm = () => {
   });
 
   const onSubmit: SubmitHandler<SignUp> = async (data) => {
-    const user = await sendRequest(data.email, data.password, SERVER_REGISTER_ADRESS);
+    const user = await sendRequest(data.email, data.password, true);
     if (user instanceof HttpError) {
       dispatch(showAlert({ type: 'warning', message: user.message }));
       return;

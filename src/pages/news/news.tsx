@@ -105,9 +105,11 @@ export const News: React.FC = () => {
             <h2>Новости</h2>
           </Col>
           <Col>
-            <Button style={{ marginRight: 8 }} onClick={handleCreate} type="primary">
-              Создать новость
-            </Button>
+            {user ?
+              <Button style={{ marginRight: 8 }} onClick={handleCreate} type="primary">
+                Создать новость
+              </Button> : <></>
+            }
             <Button onClick={handleLogout}>{user ? user.username : 'Войти'}</Button>
           </Col>
         </Row>

@@ -3,14 +3,19 @@ import type { UserJWT } from '../types/user.type';
 import { HttpError } from './http-error';
 import { AXIOS_ERROR } from '../constants/errors.constant';
 import { setTokenCookie } from './cookies';
-import { SERVER_ADRESS } from '../constants/env';
+import { SERVER_ADRESS, SERVER_LOGIN_ADRESS, SERVER_REGISTER_ADRESS } from '../constants/env';
 
-export const sendRequest = async (identifier: string, password: string, path: string): Promise<UserJWT | HttpError> => {
+export const sendRequest = async (identifier: string, password: string, register: boolean): Promise<UserJWT | HttpError> => {
   try {
     axios.defaults.headers.common['Authorization'] = '';
     const res = await axios.post(
-      `${SERVER_ADRESS}${path}`,
-      { identifier, password },
+      `${SERVER_ADRESS}${register ? SERVER_REGISTER_ADRESS : SERVER_LOGIN_ADRESS}`,
+      {
+        identifier: register ? undefined : identifier,
+        email: register ? identifier : undefined,
+        username: register ? identifier.split('@')[0] : undefined,
+        password
+      },
       {
         headers: { 'Content-Type': 'application/json' },
         withCredentials: true,

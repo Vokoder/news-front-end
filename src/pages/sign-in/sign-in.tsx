@@ -17,7 +17,6 @@ import { INVALID_CREDENTIAL } from '../../constants/validation';
 import { showAlert, hideAlert } from '../../store';
 import { sendRequest } from '../../modules/auth-axios';
 import { HttpError } from '../../modules/http-error';
-import { SERVER_LOGIN_ADRESS } from '../../constants/env';
 import { useAppDispatch } from '../../store/hooks';
 import { logIn } from '../../store/user-slice';
 
@@ -34,7 +33,7 @@ export const SignInForm = () => {
   const [isInvalidCredentials, setIsInvalidCredentials] = useState(false);
 
   const onSubmit: SubmitHandler<SignIn> = async (data) => {
-    const user = await sendRequest(data.email, data.password, SERVER_LOGIN_ADRESS);
+    const user = await sendRequest(data.email, data.password, false);
     if (user instanceof HttpError) {
       dispatch(showAlert({ type: 'warning', message: user.message }));
       if (user.status === 401) setIsInvalidCredentials(true);
