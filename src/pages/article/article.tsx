@@ -134,7 +134,7 @@ export const ArticleDetail: React.FC = () => {
   if (error) return <div style={{ color: 'red' }}>{error}</div>;
   if (!article) return <div>Новость не найдена</div>;
 
-  const published = article.publishedAt ?? article.createdAt ?? null;
+  const published = article.createdAt ?? article.createdAt ?? null;
   const formattedDate = published ? new Date(published).toLocaleString() : '—';
 
   return (

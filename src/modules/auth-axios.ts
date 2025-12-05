@@ -24,7 +24,7 @@ export const sendRequest = async (identifier: string, password: string, register
     if (res.status !== 200) return new HttpError(res.status, res.data);
 
     const jwt = res.data?.jwt;
-    if (!jwt) throw new HttpError(500, 'JWT ticken is missing');
+    if (!jwt) return new HttpError(500, 'JWT ticken is missing');
     setTokenCookie(jwt);
 
     axios.defaults.headers.common['Authorization'] = `Bearer ${jwt}`;

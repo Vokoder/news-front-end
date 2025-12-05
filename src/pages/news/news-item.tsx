@@ -8,7 +8,7 @@ type Props = {
 };
 
 export const NewsItem: React.FC<Props> = ({ article }) => {
-  const date = article.publishedAt ? new Date(article.publishedAt).toLocaleDateString() : '—';
+  const date = article.createdAt ? new Date(article.createdAt).toLocaleDateString() : '—';
   return (
     <Card hoverable style={{ marginBottom: 16 }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
